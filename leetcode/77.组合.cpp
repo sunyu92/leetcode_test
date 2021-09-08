@@ -9,7 +9,7 @@ class Solution {
     
 public:
     vector<vector<int>>res;
-    // vector<int> path;
+    vector<int> path;
 
     vector<vector<int>> combine(int n, int k)
     {
@@ -18,11 +18,11 @@ public:
             return res;
         }
         vector<int> path;
-        backtrack(n, k, 1, path);
+        backtrack(n, k, 1);
         return res;
     }
 
-    void backtrack(int n, int k, int start, vector<int>& path)
+    void backtrack(int n, int k, int start)
     {
         // 到达树的底部
         if (k == path.size()) 
@@ -35,7 +35,7 @@ public:
         {
             // 做选择
             path.push_back(i);
-            backtrack(n, k, i + 1, path);
+            backtrack(n, k, i + 1);
             // 撤销选择
             path.pop_back();
         }
