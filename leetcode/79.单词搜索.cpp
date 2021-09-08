@@ -9,36 +9,42 @@ class Solution {
 public:
     bool exist(vector<vector<char>>& board, string word)
      {
-        if (board.empty()) return false;
+        if (board.empty())
+        {
+            return false;
+        }
+
         int m = board.size(), n = board[0].size();
         vector<vector<bool>> visited(m, vector<bool>(n, false));
         bool find = false;
         for (int i = 0; i < m; ++i)
          {
-            for (int j = 0; j < n; ++j) {
-            backtracking(i, j, board, word, find, visited, 0);
-        }
+            for (int j = 0; j < n; ++j)
+             {
+                backtracking(i, j, board, word, find, visited, 0);
+            }
     }
     return find;
 }
 
     // 辅函数
     void backtracking(int i, int j, vector<vector<char>>& board, string& word, bool
-    & find, vector<vector<bool>>& visited, int pos)
+    & find, vector<vector<bool>>& visited, int wordIndex)
     {
-        // 边界
+        // 检测是否出边界
         if (i < 0 || i >= board.size() || j < 0 || j >= board[0].size())
          {
             return;
         }
 
-        // 已搜索
-        if (visited[i][j] || find || board[i][j] != word[pos]) 
+        // 走到已经搜索过的位置，返回 || 找到答案，返回 ||当前位的字母不相等，此路不通，返回 
+        if (visited[i][j] || find || board[i][j] != word[wordIndex]) 
         {
             return;
         }
 
-        if (pos == word.size() - 1) 
+        // 成功搜索到单词末尾，返回true
+        if (wordIndex == word.size() - 1) 
         {
             find = true;
             return;
@@ -46,10 +52,10 @@ public:
 
         visited[i][j] = true; // 修改当前节点状态
         // 递归子节点
-        backtracking(i + 1, j, board, word, find, visited, pos + 1);
-        backtracking(i - 1, j, board, word, find, visited, pos + 1);
-        backtracking(i, j + 1, board, word, find, visited, pos + 1);
-        backtracking(i, j - 1, board, word, find, visited, pos + 1);
+        backtracking(i + 1, j, board, word, find, visited, wordIndex + 1);
+        backtracking(i - 1, j, board, word, find, visited, wordIndex + 1);
+        backtracking(i, j + 1, board, word, find, visited, wordIndex + 1);
+        backtracking(i, j - 1, board, word, find, visited, wordIndex + 1);
         visited[i][j] = false; // 回改当前节点状态
         }
 };
