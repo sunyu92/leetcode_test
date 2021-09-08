@@ -36,13 +36,13 @@ public:
             return;
         }
 
-        // 检查是否没找到，已经发现结果，已经访问过
+        // 走到已经搜索过的位置，返回 || 找到答案，返回 ||当前位的字母不相等，此路不通，返回 
         if (visited[i][j] || find || board[i][j] != word[wordIndex]) 
         {
             return;
         }
 
-        // 找到并返回 true 结果
+        // 找到并返回 true 结果， 成功搜索到单词末尾，返回true
         if (wordIndex == word.size() - 1)
         {
             find = true;
@@ -50,13 +50,13 @@ public:
         }
 
         // 标记
-        visited[i][j] = true;
-        // 递归
+        visited[i][j] = true;   // 修改当前节点状态
+        // // 递归子节点
         backtrack(i - 1, j, board, word, find, visited, wordIndex + 1);
         backtrack(i + 1, j, board, word, find, visited, wordIndex + 1);
         backtrack(i, j - 1, board, word, find, visited, wordIndex + 1);
         backtrack(i, j + 1, board, word, find, visited, wordIndex + 1);
-        visited[i][j] = false;
+        visited[i][j] = false;      // 回改当前节点状态
     }
 };
 // @lc code=end
