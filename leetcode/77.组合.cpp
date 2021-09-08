@@ -6,30 +6,40 @@
 
 // @lc code=start
 class Solution {
-private:
-    vector<vector<int>> res;
-
+    
 public:
+    vector<vector<int>>res;
+    // vector<int> path;
+
     vector<vector<int>> combine(int n, int k)
-     {
-        if ( k <= 0 || n <= 0 )
+    {
+        if (k <= 0 || n <= 0) 
         {
             return res;
         }
-
         vector<int> path;
-        backtrace( n, k, 1, path );
+        backtrack(n, k, 1, path);
         return res;
     }
 
-    void backtrace( int n, int k, int start, vector<int>& path )
+    void backtrack(int n, int k, int start, vector<int>& path)
     {
-        if ( k == path.size() )
+        // 到达树的底部
+        if (k == path.size()) 
         {
-            
+            res.push_back(path);
+            return;
+        }
+        // 注意 i 从 start 开始递增
+        for (int i = start; i <= n; i++)
+        {
+            // 做选择
+            path.push_back(i);
+            backtrack(n, k, i + 1, path);
+            // 撤销选择
+            path.pop_back();
         }
     }
-
 };
 // @lc code=end
 
