@@ -41,12 +41,12 @@ public:
                 return depth;
             }
 
-            if (cur->left == nullptr)
+            if (cur->left != nullptr)
             {
                 q.emplace(cur->left, depth + 1);
             }
 
-            if (cur->right == nullptr)
+            if (cur->right != nullptr)
             {
                 q.emplace(cur->right, depth + 1);
             }
