@@ -8,31 +8,18 @@
 class Solution {
 public:
     int fib(int N) {
-        if (N < 1)
-        {
-            return 0;
-        }
+    if (N==0)return 0;
+    if (N==1)return 1;
+    if (N==2)return 1;
 
-        vector<int> memo(N + 1, 0);
-        
-        return helper(memo, N);
-    }
+    vector<int> dp(N + 1, 0);
+    // base case
+    dp[1] = dp[2] = 1;
+    for (int i = 3; i <= N; i++)
+        dp[i] = dp[i - 2] + dp[i - 1];
+    return dp[N];
+}
 
-    int helper(vector<int>& memo, int n)
-    {
-        if (n == 1 || n == 2)
-        {
-            return 1;
-        }
-
-        if (memo[n] != 0)
-        {
-            return memo[n];
-        }
-
-        memo[n] = helper(memo, n - 1) + helper(memo, n - 2);
-        return memo[n];
-    }
 };
 // @lc code=end
 
