@@ -18,7 +18,6 @@
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
-        
         if(head == NULL)    return head;
         Quick_Sort(head, NULL);
         return head;    
@@ -52,5 +51,6 @@ public:
             Quick_Sort(p1->next, end); // 后一半链表头为 p1->next，尾为 end
         }
     }
+};
 // @lc code=end
 
